@@ -33,5 +33,7 @@ export const LogEntrySchema = z.object({
   amount: z.number(),
   rate: z.number(),
   result: z.number(),
-  loggedAt: z.string(),
+  loggedAt: z.iso.datetime(),
 });
+
+export const LogSchema = z.array(LogEntrySchema);

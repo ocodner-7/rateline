@@ -1,4 +1,4 @@
-import { RateRowsSchema, CurrenciesSchema, RateRowSchema, Currency, CurrencyPairSchema, LogEntrySchema } from "../schemas";
+import { RateRowsSchema, CurrenciesSchema, RateRowSchema, Currency, CurrencyPairSchema, LogEntrySchema, LogSchema } from "../schemas";
 import { z } from "zod";
 
 
@@ -40,3 +40,4 @@ export type CurrencyPair = z.infer<typeof CurrencyPairSchema>;
 
 export type LogEntry = z.infer<typeof LogEntrySchema>;
 export type NewLogEntry = Omit<LogEntry, "id" | "loggedAt">;
+export type Log = z.infer<typeof LogSchema>;
