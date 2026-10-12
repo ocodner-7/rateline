@@ -1,4 +1,4 @@
-import { RateRowsSchema, CurrenciesSchema, RateRowSchema, Currency } from "../schemas";
+import { RateRowsSchema, CurrenciesSchema, RateRowSchema, Currency, CurrencyPairSchema } from "../schemas";
 import { z } from "zod";
 
 
@@ -36,3 +36,4 @@ export type RateRows = z.infer<typeof RateRowsSchema>;
 
 export type Currency = z.infer<typeof Currency>;
 export type Currencies = z.infer<typeof CurrenciesSchema>;
+export type CurrencyPair = z.infer<typeof CurrencyPairSchema>;

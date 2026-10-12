@@ -19,3 +19,9 @@ export const CurrenciesSchema = z.array(Currency);
 
 export const ApiErrorBodySchema = z.object({ message: z.string() });
 
+export const CurrencyPairSchema = z.object({
+    base: z.string(),
+    quote: z.string(),
+});
+
+export const FavouritesSchema = z.array(CurrencyPairSchema);
