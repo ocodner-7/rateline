@@ -24,27 +24,42 @@ export const computeMetrics = (points: SeriesPoint[]): RangeMetrics | null => {
   return { open, last, change, changePct };
 };
 
-export function computeSnapshots(rows: RateRows, quotes: string[]): Snapshot[] {
+export const calculatePct = (a: number, b: number) => (a / b) * 100;
+
+export const computeSnapshots = (
+  rows: RateRows,
+  quotes: string[],
+): Snapshot[] => {
   const snapshots: Snapshot[] = [];
+  const base = rows[0]?.base ?? "";
+
   for (const raw of quotes) {
     const quote = raw.toUpperCase();
     const series = toSeries(rows, quote);
     const latest = series[series.length - 1];
+
     if (!latest) continue;
-    const prev = series.length > 1 ? series[series.length - 2] : null;
-    const change = prev ? latest.rate - prev.rate : null;
+
+    const previous = series.length > 1 ? series[series.length - 2] : null;
+
+    const change = previous ? latest.rate - previous.rate : null;
+
     snapshots.push({
-      base: rows.find((r) => r.quote === quote)?.base ?? "",
+      base,
       quote,
-      rate: latest.rate,
-      date: latest.date,
-      previousRate: prev?.rate ?? null,
-      previousDate: prev?.date ?? null,
       change,
-      changePct: prev && change !== null ? (change / prev.rate) * 100 : null,
+      changePct:
+        previous && change !== null
+          ? calculatePct(change, previous.rate)
+          : null,
+      previousDate: previous ? previous.date : null,
+      previousRate: previous ? previous.rate : null,
+      date: latest.date,
+      rate: latest.rate,
     });
   }
+
   return snapshots;
-}
+};
 
 export const convert = (amount: number, rate: number): number => amount * rate;
