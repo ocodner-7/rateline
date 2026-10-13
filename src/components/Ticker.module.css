@@ -1,0 +1,106 @@
+.strip {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  background-color: var(--neutral-700);
+}
+
+.strip::-webkit-scrollbar {
+  display: none;
+}
+
+.label {
+  composes: textPreset5Medium from "../typography.module.css";
+  position: relative;
+  left: 0;
+  z-index: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background: var(--lime-500); /* use your page background token */
+  color: var(--neutral-900);
+}
+
+.track {
+  display: flex;
+  flex-shrink: 0;
+  width: max-content;
+  animation: scroll 50s linear infinite;
+}
+
+.strip:hover .track {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .strip {
+    overflow-x: auto;
+  }
+
+  .track {
+    animation: none;
+  }
+
+  .clone {
+    display: none;
+  }
+}
+
+
+.label::before {
+    content: "•" / "";
+}
+
+.ticker {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0.7rem 1.5rem;
+  border-inline-start: 1px solid var(--neutral-400); 
+}
+
+.pair {
+  composes: textPreset5Medium from "../typography.module.css";
+  color: var(--neutral-200);
+}
+
+.rate {
+  composes: textPreset4 from "../typography.module.css";
+}
+
+.change {
+  composes: textPreset5Medium from "../typography.module.css";
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.up {
+  color: var(--green-500);
+}
+
+.down {
+  color: var(--red-500);
+}
+
+.flat {
+  color: var(--neutral-200);
+}

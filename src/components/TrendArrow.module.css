@@ -1,0 +1,9 @@
+.arrow {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.down {
+  transform: rotate(180deg);
+}

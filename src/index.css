@@ -4,22 +4,22 @@
   color-scheme: dark;
 
   /* Colours */
-  --neutral-900: #0A0A0A;
+  --neutral-900: #0a0a0a;
   --neutral-700: #171719;
   --neutral-600: #202022;
-  --neutral-500: #2E2E2E;
-  --neutral-400: #3D3D3D;
+  --neutral-500: #2e2e2e;
+  --neutral-400: #3d3d3d;
   --neutral-300: #454547;
-  --neutral-200: #9D9D9D;
-  --neutral-100: #C6C6C6;
-  --neutral-50: #FFFFFF;
+  --neutral-200: #9d9d9d;
+  --neutral-100: #c6c6c6;
+  --neutral-50: #ffffff;
 
-  --lime-500: #CEF739;
+  --lime-500: #cef739;
   --lime-800: #283300;
 
-  --green-500: #42EB05;
+  --green-500: #42eb05;
 
-  --red-500: #FF4141;
+  --red-500: #ff4141;
 
   /* Spacing */
   --spacing-0: 0;
@@ -57,6 +57,23 @@
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: var(--font-mono);
+}
+
+html {
+  margin: 0;
+  padding: 0;
 }
