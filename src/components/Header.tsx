@@ -32,7 +32,7 @@ export const Header = ({ children }: HeaderProps) => {
       <p className={styles.meta}>
         <span>{currencyCount ?? "—"} currencies</span>
         <span>EOD</span>
-        <span>CENTRAL BANK DATA</span>
+        <span className={styles.source}>CENTRAL BANK DATA</span>
       </p>
     </header>
   );
