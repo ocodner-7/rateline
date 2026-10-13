@@ -13,7 +13,9 @@ import {
   toSeries,
 } from "./metrics";
 import { getRangeWindow, getSnapshotWindow, type Range } from "./ranges";
-import { useQuery, queryOptions } from "@tanstack/react-query";
+import { useQuery, queryOptions, useQueries } from "@tanstack/react-query";
+import type { CurrencyPair } from "./types";
+import { createPairKey, groupByBase } from "./pairs";
 
 const HOUR = 60 * 60 * 1000;
 const DAY = 24 * HOUR;
@@ -116,3 +118,26 @@ export const useRangeMetrics = (base: string, quote: string, range: Range) =>
     enabled: Boolean(base && quote),
     select: computeMetrics,
   });
+
+export const usePairSnapshots = (pairs: CurrencyPair[]) => {
+  const groups = groupByBase(pairs);
+
+  return useQueries({
+    queries: Object.entries(groups).map(([base, quotes]) =>
+      snapshotsQuery(base, quotes),
+    ),
+    combine: (results) => {
+      const flat = results.flatMap((r) => r.data ?? []);
+      const error = results.find((r) => r.error)?.error ?? null;
+      const isPending = results.some((r) => r.isPending);
+
+      const bySnapshotKey = new Map(flat.map((s) => [createPairKey(s), s]));
+
+      const data = pairs
+        .map((pair) => bySnapshotKey.get(createPairKey(pair)))
+        .filter((s) => s !== undefined);
+
+      return { data, isPending, error };
+    },
+  });
+};

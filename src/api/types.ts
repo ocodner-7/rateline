@@ -4,6 +4,7 @@ import { z } from "zod";
 
 // ====== regular types =======
 export type Group = "week" | "month";
+export type ArrowDirection = "flat" | "up" | "down";
 
 // ====== interfaces ======
 export interface SeriesPoint {
