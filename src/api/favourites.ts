@@ -1,12 +1,9 @@
 import { useCallback, useSyncExternalStore } from "react";
 import { FavouritesSchema } from "../schemas";
-import { normaliseCode } from "./api";
 import type { CurrencyPair } from "./types";
 import { createLocalStore } from "./store";
+import { createPairKey } from "./pairs";
 
-export const createPairKey = (pair: CurrencyPair) => {
-  return `${normaliseCode(pair.base)}/${normaliseCode(pair.quote)}`;
-};
 
 export const FAVOURITES_STORAGE_KEY = "rateline:favourites:v1";
 

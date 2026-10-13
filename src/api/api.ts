@@ -100,3 +100,5 @@ export const getRates = async (
   return request("/rates", RateRowsSchema, params, signal);
 };
 
+export const getErrorMessage = (error: unknown) =>
+  error instanceof Error ? error.message : "Something went wrong";
