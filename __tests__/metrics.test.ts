@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { applyTail, computeMetrics, computeSnapshots, convert, toSeries } from "../src/api/metrics";
+import { parseAmount } from "../src/api/metrics";
 
 const row = (date: string, quote: string, rate: number) => ({
   date,
@@ -118,5 +119,34 @@ describe("computeSnapshots", () => {
     const converted = convert(amount, rate);
 
     expect(converted).toBeCloseTo(expected);
+  });
+});
+
+describe("parseAmount", () => {
+  it.each([
+    ["1000", 1000],
+    ["1,000", 1000],
+    ["1,000,000", 1000000],
+    ["1000.5", 1000.5],
+    ["1,000.50", 1000.5],
+    [".5", 0.5],
+    ["0", 0],
+    ["  12  ", 12],
+    ["1e3", 1000]
+  ])("parses %j as %d", (input, expected) => {
+    expect(parseAmount(input)).toBe(expected);
+  });
+
+  it.each([
+    [""],
+    ["   "],
+    ["abc"],
+    ["12abc"],
+    ["1.2.3"],
+    ["-5"],
+    ["Infinity"],
+    ["NaN"],
+  ])("returns null for %j", (input) => {
+    expect(parseAmount(input)).toBeNull();
   });
 });

@@ -63,3 +63,13 @@ export const computeSnapshots = (
 };
 
 export const convert = (amount: number, rate: number): number => amount * rate;
+
+export const parseAmount = (input: string): number | null => {
+  const cleaned = input.replaceAll(",", "").trim();
+  if (cleaned === "") return null;
+
+  const value = Number(cleaned);
+  if (!Number.isFinite(value) || value < 0) return null;
+
+  return value;
+};
