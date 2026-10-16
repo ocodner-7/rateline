@@ -1,6 +1,6 @@
 // __tests__/format.test.ts
 import { describe, expect, it } from "vitest";
-import { formatChangePct, formatRate, getDirection } from "../src/api/format";
+import { formatAmount, formatChangePct, formatRate, getDirection } from "../src/api/format";
 
 describe("formatRate", () => {
   it.each([
@@ -49,5 +49,23 @@ describe("getDirection", () => {
       if (direction === "up") expect(text.startsWith("+")).toBe(true);
       if (direction === "down") expect(text.startsWith("-")).toBe(true);
     }
+  });
+});
+
+describe("formatAmount", () => {
+  it.each([
+    ["1000", "1,000"],
+    ["1000000", "1,000,000"],
+    ["1000.5", "1,000.5"],
+    ["1,000", "1,000"],
+    [".5", "0.5"],
+    ["0", "0"],
+    ["12", "12"],
+  ])("formats %j as %j", (input, expected) => {
+    expect(formatAmount(input)).toBe(expected);
+  });
+
+  it.each([[""], ["abc"], ["1.2.3"]])("leaves %j unchanged", (input) => {
+    expect(formatAmount(input)).toBe(input);
   });
 });
