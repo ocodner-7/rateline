@@ -1,0 +1,42 @@
+.group {
+  display: flex;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.25rem;
+  background-color: var(--neutral-700);
+  border: 1px solid var(--neutral-400);
+  border-radius: var(--radius-8);
+  margin: var(--spacing-200) 0;
+}
+
+.item {
+  flex: 1;  
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  color: var(--neutral-200);
+  font: inherit;
+  border: none;
+  border-radius: var(--radius-8);
+  cursor: pointer;
+  font-size: small;
+}
+
+.item[aria-pressed="true"] {
+  background-color: var(--neutral-400);
+  color: inherit;
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--lime-500);
+  outline-offset: 2px;
+}
+
+@media (min-width: 64rem) {
+  .group {
+    width: fit-content;
+  }
+
+  .item {
+    flex: none;
+  }
+}

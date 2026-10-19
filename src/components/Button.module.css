@@ -1,0 +1,41 @@
+.button {
+  font: inherit;
+  font-size: small;
+  font-weight: 500;
+  color: inherit;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid transparent; /* every variant reserves the same 1px, so all three are the same size */
+  border-radius: var(--radius-8);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.base {
+  background-color: var(--neutral-500);
+  border-color: var(--neutral-200);
+}
+
+.primary {
+  background-color: var(--lime-500);
+  color: var(--neutral-700);
+}
+
+.secondary {
+  background: transparent;
+  border-color: var(--lime-500);
+}
+
+.secondary:hover {
+  background-color: var(--lime-800);
+}
+
+.secondary:disabled {
+  border-color: var(
+    --neutral-300
+  ); /* hides the lime border when disabled, without changing the size */
+}

@@ -37,7 +37,7 @@ export const Ticker = ({ pairs }: TickerProps) => {
 
   return (
     <div className={styles.strip}>
-      <span className={styles.label}>Live Markets</span>
+      <span className={styles.label}>LIVE MARKETS</span>
       <div className={styles.track}>
       <ul className={styles.ticker}>
         {items}

@@ -5,6 +5,9 @@ import { z } from "zod";
 // ====== regular types =======
 export type Group = "week" | "month";
 export type ArrowDirection = "flat" | "up" | "down";
+export type CurrencyGroup = { value: string; items: Currency[] };
+export type MetricKey = keyof RangeMetrics;
+export type YTicks = { max: number, mid: number, min: number };
 
 // ====== interfaces ======
 export interface SeriesPoint {

@@ -110,6 +110,11 @@ export const useSeries = (base: string, quote: string, range: Range) =>
   useQuery({
     ...seriesQuery(base, quote, range),
     enabled: Boolean(base && quote),
+    placeholderData: (previousData, previousQuery) =>
+      previousQuery?.queryKey[2] === base &&
+      previousQuery?.queryKey[3] === quote
+        ? previousData
+        : undefined,
   });
 
 export const useRangeMetrics = (base: string, quote: string, range: Range) =>

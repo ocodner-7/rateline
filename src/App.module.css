@@ -1,0 +1,8 @@
+.main {
+  padding: 1rem var(--spacing-150);
+  margin: 0;
+}
+
+.box {
+  background-color: var(--neutral-500);
+}
