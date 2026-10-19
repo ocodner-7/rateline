@@ -1,0 +1,112 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--neutral-700);
+  border-radius: var(--radius-20);
+  padding: var(--spacing-200);
+}
+
+/* Shared by the Send and Receive rows (replaces .sendBox) */
+.field {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--spacing-200);
+  background-color: var(--neutral-500);
+  padding: var(--spacing-200);
+  border-radius: var(--radius-8);
+  border: 1px solid var(--neutral-300);
+}
+
+.field > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.field > :last-child {
+  flex-shrink: 0;
+}
+
+.receive {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.receiveLabel {
+  color: var(--neutral-200);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.receiveValue {
+  color: var(--lime-500);
+  font-size: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.receiveValue[data-long] {
+  font-size: 1.125rem;
+}
+
+.swap {
+  align-self: center;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-block: -0.5rem; /* overlaps the two rows slightly */
+  padding: 0;
+  background-color: var(--neutral-500);
+  color: inherit;
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.swapIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.rateLine {
+  margin: 1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--neutral-300);
+  composes: textPreset5 from "../typography.module.css";
+  text-align: center;
+  color: var(--neutral-200);
+}
+
+.logIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.controls {
+  display: flex;
+  gap: var(--spacing-200);
+  margin-top: var(--spacing-200);
+  justify-content: center;
+  align-items: center;
+}
+
+.base {
+  border: 1px solid red;
+}
+
+.faveButton {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-050);
+  align-items: center;
+}
+
+.btnIcon {
+  fill: var(--neutral-700);
+  display: block;
+}

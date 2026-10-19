@@ -11,11 +11,17 @@ const ratesSmall = new Intl.NumberFormat("en-GB", {
   maximumFractionDigits: 4,
 });
 
-const pctFormatter = new Intl.NumberFormat("en-GB", {
+export const pctFormatter = new Intl.NumberFormat("en-GB", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
   signDisplay: "exceptZero",
-})
+});
+
+export const changeFormatter = new Intl.NumberFormat("en-GB", {
+  minimumFractionDigits: 4,
+  maximumFractionDigits: 4,
+  signDisplay: "exceptZero",
+});
 
 export const formatRate = (rate: number) => {
   return rate >= 100 ? ratesLarge.format(rate) : ratesSmall.format(rate);
@@ -43,3 +49,4 @@ export const formatAmount = (raw: string): string => {
   // otherwise return raw as a number with thousands separators
   return thousandsFormatter.format(parsed)
 };
+

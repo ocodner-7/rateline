@@ -1,0 +1,16 @@
+.flag,
+.flagFallback {
+  width: 1.25rem; /* 24px: change this to the design's size */
+  height: 1.25rem;
+  flex-shrink: 0; /* stops it squashing inside a flex row */
+  border-radius: 50%;
+}
+
+.flag {
+  object-fit: cover; /* crops instead of stretching if the image isn't square */
+}
+
+.flagFallback {
+  display: inline-block;
+  background: var(--neutral-500);
+}
