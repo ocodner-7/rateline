@@ -110,3 +110,10 @@
   fill: var(--neutral-700);
   display: block;
 }
+
+.justLogged {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-200);
+}

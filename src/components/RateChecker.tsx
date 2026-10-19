@@ -139,10 +139,10 @@ export const RateChecker = ({ title = "CHECK THE RATE", from, to, onFromChange, 
             disabled={!canLog}
           >
             {justLogged ? (
-              <>
+              <div className={styles.justLogged}>
                 <Check className={styles.logIcon} aria-hidden="true" />
                 Logged
-              </>
+              </div>
             ) : (
               "LOG CONVERSION"
             )}
