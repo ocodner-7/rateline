@@ -58,3 +58,8 @@
   height: 1rem;
 }
 
+.icon {
+  display: flex;
+  margin-left: auto;
+}
+

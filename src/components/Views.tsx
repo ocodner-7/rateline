@@ -3,6 +3,7 @@ import { useConversionLog } from "../api/conversionLog";
 import { useFavourites } from "../api/favourites";
 import { ViewSwitcher, type View } from "./ViewSwitcher";
 import styles from "./Views.module.css";
+import { ConversionLogView } from "./ConversionLogView";
 
 const HistoryView = lazy(() =>
   import("./HistoryView").then((module) => ({ default: module.HistoryView })),
@@ -32,7 +33,7 @@ export const Views = ({ base, quote }: ViewsProps) => {
       )}
       {view === "compare" && <p>Compare view coming next.</p>}
       {view === "favourites" && <p>Favorites view coming next.</p>}
-      {view === "log" && <p>Log view coming next.</p>}
+      {view === "log" && <ConversionLogView />}
     </section>
   );
 };
