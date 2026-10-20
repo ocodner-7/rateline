@@ -8,6 +8,7 @@
   border-radius: var(--radius-8);
   cursor: pointer;
   white-space: nowrap;
+  transition: background-color 150ms ease,filter 150ms ease;
 }
 
 .button:disabled {
@@ -30,7 +31,7 @@
   border-color: var(--lime-500);
 }
 
-.secondary:hover {
+.secondary:enabled:hover {
   background-color: var(--lime-800);
 }
 
@@ -38,4 +39,18 @@
   border-color: var(
     --neutral-300
   ); /* hides the lime border when disabled, without changing the size */
+}
+
+.base:enabled:hover {
+  background-color: var(--neutral-400);
+}
+
+.primary:enabled:hover {
+  filter: brightness(0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
 }
