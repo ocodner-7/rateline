@@ -1,5 +1,12 @@
 .rangeMetrics {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-100);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-100);
+}
+
+@media (min-width: 768px) {
+  .rangeMetrics {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 75%;
+  }
 }

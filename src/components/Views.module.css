@@ -6,3 +6,22 @@
   display: flex;
   margin-bottom: 1rem;
 }
+
+.select {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .select {
+    display: none;
+  }
+}
+
+.loading {
+  display: grid;
+  place-items: center;
+  min-height: 20rem;
+  margin: 0;
+  color: var(--neutral-200);
+}

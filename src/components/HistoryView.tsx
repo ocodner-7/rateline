@@ -57,37 +57,38 @@ export const HistoryView = ({ base, quote }: HistoryProps) => {
   else if (seriesPending) chartStatus = "loading";
 
   return (
-    <div>
-      <div className={styles.rangeMetrics}>
-        <RangeMetricCard label={LABELS.open}>
-          {metrics ? formatRate(metrics.open) : NO_VALUE}
-        </RangeMetricCard>
-        <RangeMetricCard label={LABELS.last}>
-          {metrics ? formatRate(metrics.last) : NO_VALUE}
-        </RangeMetricCard>
-        <RangeMetricCard direction={direction} label={LABELS.change}>
-          {metrics ? changeFormatter.format(metrics.change) : NO_VALUE}
-        </RangeMetricCard>
-        <RangeMetricCard direction={direction} label={LABELS.changePct}>
-          {metrics ? (
-            <>
-              {direction && <TrendArrow direction={direction} />}
-              {pctFormatter.format(metrics.changePct)}%
-            </>
-          ) : (
-            NO_VALUE
-          )}
-        </RangeMetricCard>
+    <>
+      <div className={styles.toolbar}>
+        <div className={styles.rangeMetrics}>
+          <RangeMetricCard label={LABELS.open}>
+            {metrics ? formatRate(metrics.open) : NO_VALUE}
+          </RangeMetricCard>
+          <RangeMetricCard label={LABELS.last}>
+            {metrics ? formatRate(metrics.last) : NO_VALUE}
+          </RangeMetricCard>
+          <RangeMetricCard direction={direction} label={LABELS.change}>
+            {metrics ? changeFormatter.format(metrics.change) : NO_VALUE}
+          </RangeMetricCard>
+          <RangeMetricCard direction={direction} label={LABELS.changePct}>
+            {metrics ? (
+              <>
+                {direction && <TrendArrow direction={direction} />}
+                {pctFormatter.format(metrics.changePct)}%
+              </>
+            ) : (
+              NO_VALUE
+            )}
+          </RangeMetricCard>
+        </div>
+
+        <RangeSelector ranges={RANGES} value={range} onChange={setRange} />
       </div>
-
-      <RangeSelector ranges={RANGES} value={range} onChange={setRange} />
-
       <ChartCard
         base={base}
         quote={quote}
         points={points}
         status={chartStatus}
       />
-    </div>
+    </>
   );
 };

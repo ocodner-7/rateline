@@ -1,16 +1,10 @@
 import { Select } from "@base-ui/react/select";
+import { Check } from "lucide-react";
 import { CaretDown } from "./CaretDown";
-import styles from "./ViewSwitcher.module.css";
 import { CountBadge } from "./CountBadge";
-
-export type View = "history" | "compare" | "favourites" | "log";
-
-const VIEW_ITEMS: { label: string; value: View }[] = [
-  { label: "History", value: "history" },
-  { label: "Compare", value: "compare" },
-  { label: "Favourites", value: "favourites" },
-  { label: "Log", value: "log" },
-];
+import styles from "./ViewSwitcher.module.css";
+import type { View } from "../api/types";
+import { VIEW_ITEMS } from "../api/constants";
 
 type ViewSwitcherProps = {
   value: View;
@@ -18,11 +12,7 @@ type ViewSwitcherProps = {
   counts?: Partial<Record<View, number>>;
 };
 
-export const ViewSwitcher = ({
-  value,
-  onChange,
-  counts = {},
-}: ViewSwitcherProps) => (
+export const ViewSwitcher = ({ value, onChange, counts = {} }: ViewSwitcherProps) => (
   <Select.Root
     items={VIEW_ITEMS}
     value={value}
@@ -42,15 +32,12 @@ export const ViewSwitcher = ({
         <Select.Popup className={styles.popup}>
           <Select.List>
             {VIEW_ITEMS.map((item) => (
-              <Select.Item
-                key={item.value}
-                value={item.value}
-                className={styles.item}
-              >
+              <Select.Item key={item.value} value={item.value} className={styles.item}>
                 <Select.ItemText>{item.label}</Select.ItemText>
-                <Select.Icon>
-                  <CountBadge count={counts[item.value]} />
-                </Select.Icon>
+                <CountBadge count={counts[item.value]} />
+                <Select.ItemIndicator className={styles.indicator}>
+                  <Check className={styles.check} aria-hidden="true" />
+                </Select.ItemIndicator>
               </Select.Item>
             ))}
           </Select.List>

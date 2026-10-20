@@ -1,11 +1,15 @@
+import { Tabs } from "@base-ui/react/tabs";
 import { lazy, Suspense, useState } from "react";
 import { useConversionLog } from "../api/conversionLog";
 import { useFavourites } from "../api/favourites";
-import { ViewSwitcher, type View } from "./ViewSwitcher";
-import styles from "./Views.module.css";
-import { ConversionLogView } from "./ConversionLogView";
-import { FavouritesView } from "./FavouritesView";
 import { CompareView } from "./CompareView";
+import { FavouritesView } from "./FavouritesView";
+import { ConversionLogView } from "./ConversionLogView";
+import { ViewSwitcher} from "./ViewSwitcher";
+import { ViewTabs } from "./ViewTabs";
+import styles from "./Views.module.css";
+import type { View } from "../api/types";
+import { isView } from "../api/constants";
 
 const HistoryView = lazy(() =>
   import("./HistoryView").then((module) => ({ default: module.HistoryView })),
@@ -25,18 +29,34 @@ export const Views = ({ base, quote, amount }: ViewsProps) => {
   const counts = { favourites: favourites.length, log: entries.length };
 
   return (
-    <section className={styles.views}>
+    <Tabs.Root
+      className={styles.views}
+      value={view}
+      onValueChange={(next) => {
+        if (isView(next)) setView(next);
+      }}
+    >
       <div className={styles.header}>
-        <ViewSwitcher value={view} onChange={setView} counts={counts} />
+        <div className={styles.select}>
+          <ViewSwitcher value={view} onChange={setView} counts={counts} />
+        </div>
+        <ViewTabs counts={counts} />
       </div>
-      {view === "history" && (
+
+      <Tabs.Panel value="history">
         <Suspense fallback={<p className={styles.loading}>Loading history…</p>}>
           <HistoryView base={base} quote={quote} />
         </Suspense>
-      )}
-      {view === "compare" && <CompareView base={base} amount={amount} />}
-      {view === "favourites" && <FavouritesView />}
-      {view === "log" && <ConversionLogView />}
-    </section>
+      </Tabs.Panel>
+      <Tabs.Panel value="compare">
+        <CompareView base={base} amount={amount} />
+      </Tabs.Panel>
+      <Tabs.Panel value="favourites">
+        <FavouritesView />
+      </Tabs.Panel>
+      <Tabs.Panel value="log">
+        <ConversionLogView />
+      </Tabs.Panel>
+    </Tabs.Root>
   );
 };
