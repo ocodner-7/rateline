@@ -67,7 +67,7 @@ export const ConversionLogView = () => {
         <p className={styles.count}>{entries.length} logged</p>
         {entries.length > 0 && (
           <Button variant="base" onClick={clear}>
-            Clear all
+            CLEAR ALL
           </Button>
         )}
       </div>

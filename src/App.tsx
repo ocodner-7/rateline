@@ -12,6 +12,7 @@ import { Views } from "./components/Views";
 function App() {
   const [from, setFrom] = useState("USD");
   const [to, setTo] = useState("GBP");
+  const [amount, setAmount] = useState("");
 
   const TICKER_PAIRS: CurrencyPair[] = [
     { base: "USD", quote: "JPY" },
@@ -28,16 +29,17 @@ function App() {
       <Ticker pairs={TICKER_PAIRS} />
 
       <main className={styles.main}>
+        <RateChecker
+          title="CHECK THE RATE"
+          from={from}
+          to={to}
+          amount={amount}
+          setAmount={setAmount}
+          onFromChange={setFrom}
+          onToChange={setTo}
+        />
 
-          <RateChecker
-            title="CHECK THE RATE"
-            from={from}
-            to={to}
-            onFromChange={setFrom}
-            onToChange={setTo}
-          />
-
-        <Views base={from} quote={to} />
+        <Views base={from} quote={to} amount={amount} />
       </main>
     </>
   );

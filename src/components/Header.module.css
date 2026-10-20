@@ -5,6 +5,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--spacing-100);
+  text-transform: uppercase;
 }
 
 .logo {

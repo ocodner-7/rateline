@@ -4,6 +4,8 @@ import { useFavourites } from "../api/favourites";
 import { ViewSwitcher, type View } from "./ViewSwitcher";
 import styles from "./Views.module.css";
 import { ConversionLogView } from "./ConversionLogView";
+import { FavouritesView } from "./FavouritesView";
+import { CompareView } from "./CompareView";
 
 const HistoryView = lazy(() =>
   import("./HistoryView").then((module) => ({ default: module.HistoryView })),
@@ -12,9 +14,10 @@ const HistoryView = lazy(() =>
 type ViewsProps = {
   base: string;
   quote: string;
+  amount: string;
 };
 
-export const Views = ({ base, quote }: ViewsProps) => {
+export const Views = ({ base, quote, amount }: ViewsProps) => {
   const [view, setView] = useState<View>("history");
   const { favourites } = useFavourites();
   const { entries } = useConversionLog();
@@ -31,8 +34,8 @@ export const Views = ({ base, quote }: ViewsProps) => {
           <HistoryView base={base} quote={quote} />
         </Suspense>
       )}
-      {view === "compare" && <p>Compare view coming next.</p>}
-      {view === "favourites" && <p>Favorites view coming next.</p>}
+      {view === "compare" && <CompareView base={base} amount={amount} />}
+      {view === "favourites" && <FavouritesView />}
       {view === "log" && <ConversionLogView />}
     </section>
   );

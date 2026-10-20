@@ -8,7 +8,7 @@ export type View = "history" | "compare" | "favourites" | "log";
 const VIEW_ITEMS: { label: string; value: View }[] = [
   { label: "History", value: "history" },
   { label: "Compare", value: "compare" },
-  { label: "Favorites", value: "favourites" },
+  { label: "Favourites", value: "favourites" },
   { label: "Log", value: "log" },
 ];
 

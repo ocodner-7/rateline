@@ -1,6 +1,6 @@
 .log {
   min-width: 0;
-  background-color: var(--neutral-600);
+  background-color: var(--neutral-700);
   padding: var(--spacing-200);
   border-radius: var(--radius-16);
   outline: 1px solid var(--neutral-400);
@@ -18,8 +18,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: var(--spacing-200);
+  margin-bottom: var(--spacing-200);
 }
 
 .count {

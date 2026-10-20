@@ -24,9 +24,7 @@ export const Ticker = ({ pairs }: TickerProps) => {
         <span className={styles.pair}>{key}</span>
         <span className={styles.rate}>{formatRate(snapshot.rate)}</span>
         {typeof changePct === "number" && (
-          <span
-            className={`${styles.change} ${styles[getDirection(changePct)]}`}
-          >
+          <span className={`${styles.change} ${styles[getDirection(changePct)]}`}>
             <TrendArrow direction={getDirection(changePct)} />
             {formatChangePct(changePct)}
           </span>

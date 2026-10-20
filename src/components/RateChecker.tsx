@@ -16,6 +16,8 @@ interface RateCheckerProps {
   title: string;
   from: string;
   to: string;
+  amount: string;
+  setAmount: (amount: string) => void;
   onFromChange: (code: string) => void;
   onToChange: (code: string) => void;
 }
@@ -26,8 +28,7 @@ const receiveFormatter = new Intl.NumberFormat("en-GB", {
   maximumFractionDigits: 2,
 });
 
-export const RateChecker = ({ title = "CHECK THE RATE", from, to, onFromChange, onToChange }: RateCheckerProps) => {
-  const [amount, setAmount] = useState("");
+export const RateChecker = ({ title = "CHECK THE RATE", from, to, amount, setAmount, onFromChange, onToChange }: RateCheckerProps) => {
   const [justLogged, setJustLogged] = useState(false);
 
   const { data, error } = useRate(from, from === to ? "" : to);

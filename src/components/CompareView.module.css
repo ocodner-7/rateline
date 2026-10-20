@@ -1,0 +1,61 @@
+.compare {
+  min-width: 0;
+  background-color: var(--neutral-700);
+  outline: 1px solid var(--neutral-400);
+  border-radius: var(--radius-16);
+  padding: var(--spacing-200);
+}
+
+.header {
+  margin-bottom: var(--spacing-200);
+}
+
+.title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: var(--neutral-200);
+}
+
+.amount {
+  font-size: 0.825rem;
+}
+
+.count {
+  margin: var(--spacing-100) 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neutral-200);
+}
+
+.currency {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.names {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.code {
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
+}
+
+.name {
+  font-size: 0.7rem;
+  color: var(--neutral-200);
+}
