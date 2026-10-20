@@ -22,7 +22,11 @@
 
 .up {
   color: var(--green-500);
-}
+}  
 .down {
   color: var(--red-500);
+}
+
+@media (min-width: 768px) {
+
 }

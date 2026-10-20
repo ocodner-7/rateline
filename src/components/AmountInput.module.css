@@ -26,3 +26,9 @@
   border: none;
   outline: none;
 }
+
+@media (min-width: 1024px) {
+  .input {
+    font-size: var(--amount-font-size);
+  }
+}

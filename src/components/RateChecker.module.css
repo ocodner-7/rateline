@@ -7,6 +7,12 @@
   outline: 1px solid var(--neutral-400);
 }
 
+.sendReceive {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Shared by the Send and Receive rows (replaces .sendBox) */
 .field {
   display: flex;
@@ -31,18 +37,25 @@
 .receive {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  flex: 1;
+  gap: 1rem;
+  min-width: 0;
 }
 
 .receiveLabel {
   color: var(--neutral-200);
-  font-size: 0.75rem;
+  composes: textPreset5 from "../typography.module.css";
   letter-spacing: 0.05em;
+  display: block;
+  margin: 0;
 }
 
 .receiveValue {
   color: var(--lime-500);
-  font-size: 1.5rem;
+  font-size: var(--amount-font-size);
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
   white-space: nowrap;
   overflow: hidden;
   overflow-wrap: anywhere;
@@ -74,9 +87,8 @@
 
 .rateLine {
   margin: 1rem 0 0;
-  padding-top: 1rem;
-  border-top: 1px dashed var(--neutral-300);
-  composes: textPreset5 from "../typography.module.css";
+  padding-top: var(--spacing-075);
+  composes: textPreset4 from "../typography.module.css";
   text-align: center;
   color: var(--neutral-200);
 }
@@ -84,6 +96,10 @@
 .logIcon {
   width: 1rem;
   height: 1rem;
+}
+
+.bottom {
+  border-top: 1px dashed var(--neutral-300);
 }
 
 .controls {
@@ -117,4 +133,46 @@
   gap: var(--spacing-200);
   background-color: var(--lime-500);
   color: var(--neutral-700);
+}
+
+.sendReceive {
+  margin-bottom: var(--spacing-200);
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: larger;
+  }
+
+  .sendReceive {
+    flex-direction: row;
+    align-items: stretch;
+    gap: var(--spacing-300);
+  }
+
+  .receiveValue[data-long] {
+    font-size: var(--amount-font-size);
+  }
+
+  .field {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .swap {
+    transform: rotate(90deg);
+    flex: none;
+  }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: x-large;
+  }
 }

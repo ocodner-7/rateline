@@ -59,3 +59,11 @@
   font-size: 0.7rem;
   color: var(--neutral-200);
 }
+
+@media (min-width: 768px) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

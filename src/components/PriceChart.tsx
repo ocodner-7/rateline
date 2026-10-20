@@ -1,6 +1,11 @@
 import { Chart, Series, type ChartOptions } from "@highcharts/react";
 import { useMemo } from "react";
-import { getXTicks, getYAxisScale, withAlpha } from "../api/chart";
+import {
+  getXTicks,
+  getXTickCount,
+  getYAxisScale,
+  withAlpha,
+} from "../api/chart";
 
 export type PricePoint = { time: number; value: number };
 type PriceChartProps = { points: PricePoint[]; ariaLabel: string };
@@ -18,6 +23,7 @@ export const PriceChart = ({ points, ariaLabel }: PriceChartProps) => {
   const chart = useMemo(() => {
     const scale = getYAxisScale(points.map((point) => point.value));
     if (scale === null) return null;
+    const times = points.map((p) => p.time);
 
     const lime = readToken("--lime-500", "#c6f432");
     const muted = readToken("--neutral-200", "#9a9a9a");
@@ -45,7 +51,9 @@ export const PriceChart = ({ points, ariaLabel }: PriceChartProps) => {
       legend: { enabled: false },
       xAxis: {
         type: "datetime",
-        tickPositions: getXTicks(points.map((point) => point.time)),
+        tickPositioner() {
+          return getXTicks(times, getXTickCount(this.chart.plotWidth));
+        },
         lineWidth: 0,
         tickLength: 0,
         labels: {

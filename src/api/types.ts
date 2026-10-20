@@ -9,6 +9,10 @@ export type CurrencyGroup = { value: string; items: Currency[] };
 export type MetricKey = keyof RangeMetrics;
 export type YTicks = { max: number, mid: number, min: number };
 
+
+// ====== UI types ======
+export type View = "history" | "compare" | "favourites" | "log";
+
 // ====== interfaces ======
 export interface SeriesPoint {
     date: string;

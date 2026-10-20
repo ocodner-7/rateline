@@ -16,7 +16,6 @@ export const RangeMetricCard = ({
     <>
       <div className={styles.root}>
         <p className={styles.label}>{label}</p>
-
         <span className={`${styles.value} ${direction ? styles[direction] : ""}`}>
           {children}
         </span>

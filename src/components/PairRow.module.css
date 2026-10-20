@@ -48,10 +48,19 @@
 }
 
 .primary {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .secondary {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--neutral-200);
+}
+
+@media (min-width: 768px) {
+  .primary {
+    font-size: 1.15rem;
+  }
+  .secondary {
+    font-size: 0.75rem;
+  }
 }

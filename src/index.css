@@ -3,6 +3,8 @@
 :root {
   color-scheme: dark;
 
+  --amount-font-size: x-large;
+
   /* Colours */
   --neutral-900: #0a0a0a;
   --neutral-700: #171719;

@@ -35,8 +35,12 @@ const LogItem = ({ entry, now, onRemove }: LogItemProps) => {
           </span>
         </div>
         <div className={styles.figures}>
-          <span className={styles.amount}>{formatMoney(entry.amount, entry.base)}</span>
-          <span className={styles.result}>{formatMoney(entry.result, entry.quote)}</span>
+          <span className={styles.amount}>
+            {formatMoney(entry.amount, entry.base)}
+          </span>
+          <span className={styles.result}>
+            {formatMoney(entry.result, entry.quote)}
+          </span>
         </div>
       </div>
       <button
@@ -62,17 +66,21 @@ export const ConversionLogView = () => {
 
   return (
     <section className={styles.log}>
-      <h3 className={styles.title}>Conversion log</h3>
-      <div className={styles.bar}>
-        <p className={styles.count}>{entries.length} logged</p>
-        {entries.length > 0 && (
-          <Button variant="base" onClick={clear}>
-            CLEAR ALL
-          </Button>
-        )}
+      <div className={styles.tools}>
+        <h3 className={styles.title}>Conversion log</h3>
+        <div className={styles.bar}>
+          <p className={styles.count}>{entries.length} logged</p>
+          {entries.length > 0 && (
+            <Button variant="base" onClick={clear}>
+              CLEAR ALL
+            </Button>
+          )}
+        </div>
       </div>
       {sorted.length === 0 ? (
-        <p className={styles.empty}>No conversions logged yet. Use “Log conversion” above to add one.</p>
+        <p className={styles.empty}>
+          No conversions logged yet. Use “Log conversion” above to add one.
+        </p>
       ) : (
         <ul className={styles.list}>
           {sorted.map((entry) => (

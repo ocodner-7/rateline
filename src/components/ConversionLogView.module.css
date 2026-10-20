@@ -125,3 +125,11 @@
   text-align: center;
   color: var(--neutral-200);
 }
+
+@media (min-width: 768px) {
+  .tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

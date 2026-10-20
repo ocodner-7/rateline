@@ -28,7 +28,15 @@ const receiveFormatter = new Intl.NumberFormat("en-GB", {
   maximumFractionDigits: 2,
 });
 
-export const RateChecker = ({ title = "CHECK THE RATE", from, to, amount, setAmount, onFromChange, onToChange }: RateCheckerProps) => {
+export const RateChecker = ({
+  title = "CHECK THE RATE",
+  from,
+  to,
+  amount,
+  setAmount,
+  onFromChange,
+  onToChange,
+}: RateCheckerProps) => {
   const [justLogged, setJustLogged] = useState(false);
 
   const { data, error } = useRate(from, from === to ? "" : to);
@@ -71,7 +79,6 @@ export const RateChecker = ({ title = "CHECK THE RATE", from, to, amount, setAmo
   }, [justLogged]);
 
   const handleLog = () => {
-    console.log("log clicked", { canLog, parsed, rate });
     if (!canLog) return;
     conversionLog.add({
       base: from,
@@ -85,69 +92,73 @@ export const RateChecker = ({ title = "CHECK THE RATE", from, to, amount, setAmo
 
   return (
     <>
-      <p className="title">{title}</p>
+      <p className={styles.title}>{title}</p>
       <div className={styles.box}>
-        <div className={styles.field}>
-          <AmountInput
-            id="send"
-            label="SEND"
-            value={amount}
-            onChange={setAmount}
-          />
-          <CurrencyPicker value={from} onChange={onFromChange} />
-        </div>
-
-        <button
-          type="button"
-          className={styles.swap}
-          onClick={swap}
-          aria-label="Swap currencies"
-        >
-          <ArrowUpDown className={styles.swapIcon} aria-hidden="true" />
-        </button>
-
-        <div className={styles.field}>
-          <div className={styles.receive}>
-            <span className={styles.receiveLabel}>RECEIVE</span>
-            <output
-              htmlFor="send"
-              aria-live="polite"
-              className={styles.receiveValue}
-              data-long={formattedReceived.length > 12 ? "" : undefined}
-            >
-              {formattedReceived}
-            </output>
+        <div className={styles.sendReceive}>
+          <div className={styles.field}>
+            <AmountInput
+              id="send"
+              label="SEND"
+              value={amount}
+              onChange={setAmount}
+            />
+            <CurrencyPicker value={from} onChange={onFromChange} />
           </div>
-          <CurrencyPicker value={to} onChange={onToChange} />
+
+          <button
+            type="button"
+            className={styles.swap}
+            onClick={swap}
+            aria-label="Swap currencies"
+          >
+            <ArrowUpDown className={styles.swapIcon} aria-hidden="true" />
+          </button>
+
+          <div className={styles.field}>
+            <div className={styles.receive}>
+              <span className={styles.receiveLabel}>RECEIVE</span>
+              <output
+                htmlFor="send"
+                aria-live="polite"
+                className={styles.receiveValue}
+                data-long={formattedReceived.length > 12 ? "" : undefined}
+              >
+                {formattedReceived}
+              </output>
+            </div>
+            <CurrencyPicker value={to} onChange={onToChange} />
+          </div>
         </div>
 
-        <p className={styles.rateLine} aria-live="polite">
-          {rateLine}
-        </p>
+        <div className={styles.bottom}>
+          <p className={styles.rateLine} aria-live="polite">
+            {rateLine}
+          </p>
 
-        <div className={styles.controls}>
-          <CustomButton
-            className={styles.faveButton}
-            variant={isFavourite(pair) ? "primary" : "base"}
-            onClick={() => toggle(pair)}
-          >
-            <StarIcon className={styles.btnIcon} size={16} />
-            {isFavourite(pair) ? "FAVOURITED" : "FAVOURITE"}
-          </CustomButton>
-          <CustomButton
-            onClick={handleLog}
-            variant="secondary"
-            disabled={!canLog}
-          >
-            {justLogged ? (
-              <div className={styles.justLogged}>
-                <Check className={styles.logIcon} aria-hidden="true" />
-                Logged
-              </div>
-            ) : (
-              "LOG CONVERSION"
-            )}
-          </CustomButton>
+          <div className={styles.controls}>
+            <CustomButton
+              className={styles.faveButton}
+              variant={isFavourite(pair) ? "primary" : "base"}
+              onClick={() => toggle(pair)}
+            >
+              <StarIcon className={styles.btnIcon} size={16} />
+              {isFavourite(pair) ? "FAVOURITED" : "FAVOURITE"}
+            </CustomButton>
+            <CustomButton
+              onClick={handleLog}
+              variant="secondary"
+              disabled={!canLog}
+            >
+              {justLogged ? (
+                <div className={styles.justLogged}>
+                  <Check className={styles.logIcon} aria-hidden="true" />
+                  Logged
+                </div>
+              ) : (
+                "LOG CONVERSION"
+              )}
+            </CustomButton>
+          </div>
         </div>
       </div>
     </>
