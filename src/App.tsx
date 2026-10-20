@@ -16,11 +16,17 @@ function App() {
 
   const TICKER_PAIRS: CurrencyPair[] = [
     { base: "USD", quote: "JPY" },
-    { base: "GBP", quote: "USD" },
     { base: "USD", quote: "CHF" },
-    { base: "EUR", quote: "USD" },
-    { base: "AUD", quote: "USD" },
     { base: "USD", quote: "CAD" },
+    { base: "USD", quote: "INR" },
+    { base: "EUR", quote: "USD" },
+    { base: "EUR", quote: "GBP" },
+    { base: "EUR", quote: "JPY" },
+    { base: "GBP", quote: "USD" },
+    { base: "GBP", quote: "JPY" },
+    { base: "AUD", quote: "USD" },
+    
+    { base: "AUD", quote: "NZD" },
   ];
 
   return (
