@@ -11,6 +11,6 @@
 }
 
 .flagFallback {
-  display: inline-block;
-  background: var(--neutral-500);
+  background: none;
+  color: var(--neutral-200);
 }
