@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
 import {
+  getXTickCount,
   getXTicks,
   getYAxisScale,
   getYTicks,
@@ -65,6 +66,14 @@ describe("getXTicks", () => {
   it("returns the first, middle and last times", () => {
     expect(getXTicks([0, 10, 20, 30, 40])).toEqual([0, 20, 40]);
   });
+
+  it("returns more evenly spaced ticks when asked", () => {
+    expect(getXTicks([0, 10, 20, 30, 40], 5)).toEqual([0, 10, 20, 30, 40]);
+  });
+
+  it("never returns fewer than two ticks", () => {
+    expect(getXTicks([0, 40], 1)).toEqual([0, 40]);
+  });
 });
 
 describe("withAlpha", () => {
@@ -82,5 +91,15 @@ describe("withAlpha", () => {
 
   it("passes non-hex colours through unchanged", () => {
     expect(withAlpha("rgb(1, 2, 3)", 0.5)).toBe("rgb(1, 2, 3)");
+  });
+});
+
+describe("getXTickCount", () => {
+  it("scales the tick count with the plot width", () => {
+    expect(getXTickCount(260)).toBe(3);
+    expect(getXTickCount(399)).toBe(3);
+    expect(getXTickCount(400)).toBe(5);
+    expect(getXTickCount(639)).toBe(5);
+    expect(getXTickCount(640)).toBe(7);
   });
 });

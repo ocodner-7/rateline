@@ -39,12 +39,21 @@ export const getYAxisScale = (values: number[]): YAxisScale | null => {
   };
 };
 
-// The three date labels in the design: first, middle and last.
-export const getXTicks = (times: number[]): number[] => {
+// Evenly spaced date ticks from the first time to the last, `count` of them.
+export const getXTicks = (times: number[], count = 3): number[] => {
   if (times.length === 0) return [];
   const first = times[0];
   const last = times[times.length - 1];
-  return first === last ? [first] : [first, (first + last) / 2, last];
+  if (first === last) return [first];
+  const steps = Math.max(2, count) - 1;
+  return Array.from({ length: steps + 1 }, (_, index) => first + ((last - first) * index) / steps);
+};
+
+// More date labels as the plot gets wider: 3 on mobile, 5 on tablet, 7 on desktop.
+export const getXTickCount = (plotWidth: number): number => {
+  if (plotWidth < 400) return 3;
+  if (plotWidth < 640) return 5;
+  return 7;
 };
 
 // Highcharts gradient stops need real colour strings, not CSS variables,
