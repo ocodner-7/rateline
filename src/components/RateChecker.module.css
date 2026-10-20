@@ -110,10 +110,6 @@
   align-items: center;
 }
 
-.base {
-  border: 1px solid red;
-}
-
 .faveButton {
   display: flex;
   justify-content: center;
@@ -126,13 +122,21 @@
   display: block;
 }
 
-.justLogged {
+.logLabel {
+  display: grid;
+}
+
+.logText {
+  grid-area: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-200);
-  background-color: var(--lime-500);
-  color: var(--neutral-700);
+  gap: var(--spacing-050);
+  visibility: hidden;
+}
+
+.logText[data-visible] {
+  visibility: visible;
 }
 
 .sendReceive {

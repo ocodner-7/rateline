@@ -1,5 +1,5 @@
 import { ArrowUpDown, Check, StarIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { formatRate } from "../api/format";
 import { convert, parseAmount } from "../api/metrics";
 import { useRate } from "../api/queries";
@@ -52,6 +52,9 @@ export const RateChecker = ({
     onToChange(from);
   };
 
+  const sendRef = useRef<HTMLDivElement>(null);
+  const receiveRef = useRef<HTMLDivElement>(null);
+
   const { isFavourite, toggle } = useFavourites();
 
   const pair: CurrencyPair = { base: from, quote: to };
@@ -95,14 +98,14 @@ export const RateChecker = ({
       <p className={styles.title}>{title}</p>
       <div className={styles.box}>
         <div className={styles.sendReceive}>
-          <div className={styles.field}>
+          <div ref={sendRef} className={styles.field}>
             <AmountInput
               id="send"
               label="SEND"
               value={amount}
               onChange={setAmount}
             />
-            <CurrencyPicker value={from} onChange={onFromChange} />
+            <CurrencyPicker value={from} onChange={onFromChange} anchorRef={sendRef} />
           </div>
 
           <button
@@ -114,7 +117,7 @@ export const RateChecker = ({
             <ArrowUpDown className={styles.swapIcon} aria-hidden="true" />
           </button>
 
-          <div className={styles.field}>
+          <div ref={receiveRef} className={styles.field}>
             <div className={styles.receive}>
               <span className={styles.receiveLabel}>RECEIVE</span>
               <output
@@ -126,7 +129,7 @@ export const RateChecker = ({
                 {formattedReceived}
               </output>
             </div>
-            <CurrencyPicker value={to} onChange={onToChange} />
+            <CurrencyPicker value={to} onChange={onToChange} anchorRef={receiveRef} />
           </div>
         </div>
 
@@ -146,17 +149,24 @@ export const RateChecker = ({
             </CustomButton>
             <CustomButton
               onClick={handleLog}
-              variant="secondary"
+              variant={justLogged ? "primary" : "secondary"}
               disabled={!canLog}
             >
-              {justLogged ? (
-                <div className={styles.justLogged}>
+              <span className={styles.logLabel}>
+                <span
+                  className={styles.logText}
+                  data-visible={!justLogged ? "" : undefined}
+                >
+                  LOG CONVERSION
+                </span>
+                <span
+                  className={styles.logText}
+                  data-visible={justLogged ? "" : undefined}
+                >
                   <Check className={styles.logIcon} aria-hidden="true" />
-                  Logged
-                </div>
-              ) : (
-                "LOG CONVERSION"
-              )}
+                  LOGGED
+                </span>
+              </span>
             </CustomButton>
           </div>
         </div>

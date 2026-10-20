@@ -1,6 +1,6 @@
 import { Combobox } from "@base-ui/react/combobox";
 import { Check, Search } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, type RefObject } from "react";
 import {
   getDisplayGroups,
   groupCurrencies,
@@ -9,6 +9,7 @@ import {
 } from "../api/currencies";
 import { useCurrencies } from "../api/queries";
 import type { Currency } from "../api/types";
+import { useMediaQuery } from "../api/hooks/useMediaQuery";
 import { CaretDown } from "./CaretDown"; // adjust to where your CaretDown lives
 import { CurrencyFlag } from "./CurrencyFlag";
 import styles from "./CurrencyPicker.module.css";
@@ -16,9 +17,15 @@ import styles from "./CurrencyPicker.module.css";
 type CurrencyPickerProps = {
   value: string; // the selected currency code, e.g. "GBP"
   onChange: (code: string) => void;
+  // On mobile the menu anchors to this element instead of the trigger
+  anchorRef?: RefObject<HTMLElement | null>;
 };
 
-export const CurrencyPicker = ({ value, onChange }: CurrencyPickerProps) => {
+export const CurrencyPicker = ({
+  value,
+  onChange,
+  anchorRef,
+}: CurrencyPickerProps) => {
   const [query, setQuery] = useState("");
 
   const { data } = useCurrencies();
@@ -31,6 +38,8 @@ export const CurrencyPicker = ({ value, onChange }: CurrencyPickerProps) => {
     currencies.find((currency) => currency.iso_code === value) ?? null;
 
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const isMobile = useMediaQuery("(max-width: 767.98px)");
+  const anchorToBox = isMobile && anchorRef !== undefined;
 
   return (
     <Combobox.Root
@@ -54,8 +63,8 @@ export const CurrencyPicker = ({ value, onChange }: CurrencyPickerProps) => {
 
       <Combobox.Portal>
         <Combobox.Positioner
-          anchor={triggerRef}
-          align="end"
+          anchor={anchorToBox ? anchorRef : triggerRef}
+          align={anchorToBox ? "center" : "end"}
           side="bottom"
           sideOffset={8}
           // collisionAvoidance={{ side: "flip", align: "none" }}
@@ -89,7 +98,10 @@ export const CurrencyPicker = ({ value, onChange }: CurrencyPickerProps) => {
                       >
                         <div className={styles.countryInfo}>
                           <CurrencyFlag code={currency.iso_code} />
-                          {currency.iso_code} <span className={styles.currencyName}>{currency.name}</span>
+                          {currency.iso_code}{" "}
+                          <span className={styles.currencyName}>
+                            {currency.name}
+                          </span>
                         </div>
                         <Combobox.ItemIndicator>
                           <Check
