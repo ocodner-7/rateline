@@ -31,4 +31,8 @@
   .input {
     font-size: var(--amount-font-size);
   }
+
+  .label {
+    composes: textPreset2 from "../typography.module.css";
+  }
 }

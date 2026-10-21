@@ -145,7 +145,7 @@
 
 @media (min-width: 768px) {
   .title {
-    font-size: larger;
+    font-size: large;
   }
 
   .sendReceive {
@@ -177,6 +177,7 @@
 
 @media (min-width: 1024px) {
   .title {
-    font-size: x-large;
+    font-size: larger;
+    margin: var(--spacing-100) 0;
   }
 }
