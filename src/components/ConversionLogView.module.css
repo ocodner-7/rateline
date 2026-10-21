@@ -7,11 +7,12 @@
 }
 
 .title {
-  margin: 0 0 0.75rem;
+  margin: 0;
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  align-self: flex-start;
 }
 
 .bar {
