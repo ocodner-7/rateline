@@ -2,9 +2,9 @@
 
 A currency rate checker. Convert between currencies, see how a pair has moved over time, compare one currency against a handful of others, and keep a list of favourite pairs and a log of conversions.
 
-**Live site:** <LIVE_URL>
+**Live site:** (https://rateline.vercel.app/)
 
-![Rateline on mobile and desktop](./docs/screenshot.png)
+![Rateline on mobile and desktop](./docs/rateline-screenshot.png)
 
 Built from a Frontend Mentor design challenge. The design covers mobile only, so the tablet (768px) and desktop (1024px) layouts are my own.
 
