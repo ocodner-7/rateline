@@ -9,4 +9,10 @@
     grid-template-columns: repeat(4, 1fr);
     max-width: 75%;
   }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-200);
+  }
 }
