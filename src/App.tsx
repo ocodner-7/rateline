@@ -25,7 +25,6 @@ function App() {
     { base: "GBP", quote: "USD" },
     { base: "GBP", quote: "JPY" },
     { base: "AUD", quote: "USD" },
-    
     { base: "AUD", quote: "NZD" },
   ];
 

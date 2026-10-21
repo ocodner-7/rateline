@@ -9,6 +9,7 @@ import { FavouriteToggle } from "./FavouriteToggle";
 import styles from "./FavouritesView.module.css";
 import { PairList, PairRow } from "./PairRow";
 import { TrendArrow } from "./TrendArrow";
+import { StatusMessage } from "./StatusMessage";
 
 const NO_VALUE = "--";
 
@@ -57,13 +58,35 @@ const FavouritesItem = ({
   );
 };
 
-export const FavouritesView = () => {
-  const { favourites, toggle } = useFavourites();
+type FavouritesListProps = {
+  favourites: CurrencyPair[];
+  onToggle: (pair: CurrencyPair) => void;
+};
+
+const FavouritesList = ({ favourites, onToggle }: FavouritesListProps) => {
   const { data, isPending, error } = usePairSnapshots(favourites);
 
-  if (favourites.length === 0) return <p>No favourites yet.</p>;
-  if (isPending) return <p>Loading favourites…</p>;
-  if (error) return <p>{getErrorMessage(error)}</p>;
+  if (isPending) return <StatusMessage>Loading favourites…</StatusMessage>;
+  if (error) return <StatusMessage>{getErrorMessage(error)}</StatusMessage>;
+
+  return (
+    <PairList>
+      {data.map((snapshot) => (
+        <FavouritesItem
+          key={createPairKey(snapshot)}
+          base={snapshot.base}
+          quote={snapshot.quote}
+          rate={snapshot.rate}
+          changePct={snapshot.changePct}
+          onToggle={onToggle}
+        />
+      ))}
+    </PairList>
+  );
+};
+
+export const FavouritesView = () => {
+  const { favourites, toggle } = useFavourites();
 
   return (
     <section className={styles.favourites}>
@@ -75,18 +98,13 @@ export const FavouritesView = () => {
         </span>
       </div>
 
-      <PairList>
-        {data.map((snapshot) => (
-          <FavouritesItem
-            key={createPairKey(snapshot)}
-            base={snapshot.base}
-            quote={snapshot.quote}
-            rate={snapshot.rate}
-            changePct={snapshot.changePct}
-            onToggle={toggle}
-          />
-        ))}
-      </PairList>
+      {favourites.length === 0 ? (
+        <StatusMessage>
+          No favourites yet. Use “Favourite” above to save a pair.
+        </StatusMessage>
+      ) : (
+        <FavouritesList favourites={favourites} onToggle={toggle} />
+      )}
     </section>
   );
 };

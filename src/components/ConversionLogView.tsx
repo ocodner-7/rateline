@@ -6,6 +6,7 @@ import { formatLoggedAt } from "../api/time";
 import type { LogEntry } from "../api/types";
 import { Button } from "./Button";
 import styles from "./ConversionLogView.module.css";
+import { StatusMessage } from "./StatusMessage";
 
 const useNow = (intervalMs: number) => {
   const [now, setNow] = useState(() => Date.now());
@@ -78,9 +79,9 @@ export const ConversionLogView = () => {
         </div>
       </div>
       {sorted.length === 0 ? (
-        <p className={styles.empty}>
+        <StatusMessage>
           No conversions logged yet. Use “Log conversion” above to add one.
-        </p>
+        </StatusMessage>
       ) : (
         <ul className={styles.list}>
           {sorted.map((entry) => (
